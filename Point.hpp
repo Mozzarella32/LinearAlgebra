@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 
-#include <submodules/Serialisation/Serialization.hpp>
+#include <../submodules/Serialisation/Serialization.hpp>
 
 namespace MyDirektion {
 	enum Direktion : unsigned char {
