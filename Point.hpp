@@ -20,6 +20,36 @@ namespace MyDirektion {
 		Neutral
 	};
 
+	constexpr inline Direktion RotateCW(const Direktion& d) {
+		switch (d) {
+		case Up: return Right;
+		case Down: return Left;
+		case Left: return Up;
+		case Right: return Down;
+		case UpLeft: return UpRight;
+		case UpRight: return DownRight;
+		case DownLeft: return UpLeft;
+		case DownRight: return DownLeft;
+		default:
+			return Neutral;
+		}
+	}
+
+	constexpr inline Direktion RotateCCW(const Direktion& d) {
+		switch (d) {
+		case Up: return Left;
+		case Down: return Right;
+		case Left: return Down;
+		case Right: return Up;
+		case UpLeft: return DownLeft;
+		case UpRight: return UpLeft;
+		case DownLeft: return DownRight;
+		case DownRight: return UpRight;
+		default:
+			return Neutral;
+		}
+	}
+
 	constexpr inline Direktion operator!(const Direktion& d) {
 		switch (d) {
 		case Up: return Down;
