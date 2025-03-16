@@ -1,3 +1,4 @@
+
 [submodule "submodules/Serialisation"]
 	path = submodules/Serialisation
-	url = git@github.com:Mozzarella32/Serialisation.git
+	url = https://github.com/Mozzarella32/Serialisation.git
