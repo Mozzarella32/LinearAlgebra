@@ -62,7 +62,7 @@ namespace MyDirektion {
 		case DownRight: return UpLeft;
 		case Neutral: return Neutral;
 		default:
-		return Neutral;
+			return Neutral;
 		}
 	}
 
@@ -84,7 +84,7 @@ namespace MyDirektion {
 		if (d2 == Up && (d1 == UpRight || d1 == UpLeft))return true;
 		if (d2 == Down && (d1 == DownRight || d1 == DownLeft))return true;
 		if (d2 == Right && (d1 == UpRight || d1 == DownRight))return true;
-		if (d2 == Left && (d1 == UpLeft|| d1 == DownLeft))return true;
+		if (d2 == Left && (d1 == UpLeft || d1 == DownLeft))return true;
 		return false;
 	}
 
@@ -261,7 +261,7 @@ public:
 		return Point(static_cast<T>(x * d), static_cast<T>(y * d));
 	}
 	constexpr Point<T> operator *(const Point<T>& o) {
-		return Point(x*o.x,y*o.y);
+		return Point(x * o.x, y * o.y);
 	}
 
 	constexpr Point<T> operator /(const double& d) {
