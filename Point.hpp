@@ -241,18 +241,34 @@ public:
 		y *= d;
 		return *this;
 	}
+	constexpr Point<T>& operator *=(const Point<T>& o) {
+		x *= o.x;
+		y *= o.y;
+		return *this;
+	}
 	constexpr Point<T>& operator /=(const double& d) {
 		x /= d;
 		y /= d;
+		return *this;
+	}
+	constexpr Point<T>& operator /=(const Point<T>& o) {
+		x *= o.x;
+		y *= o.y;
 		return *this;
 	}
 
 	constexpr Point<T> operator *(const double& d) {
 		return Point(static_cast<T>(x * d), static_cast<T>(y * d));
 	}
+	constexpr Point<T> operator *(const Point<T>& o) {
+		return Point(x*o.x,y*o.y);
+	}
 
 	constexpr Point<T> operator /(const double& d) {
 		return Point(static_cast<T>(x / d), static_cast<T>(y / d));
+	}
+	constexpr Point<T> operator /(const Point<T>& o) {
+		return Point(x / o.x, y / o.y);
 	}
 
 	friend constexpr Point<T> operator * (const double& d, const Point<T>& p) {
