@@ -5,8 +5,8 @@
 
 #include "submodules/Serialisation/Serialization.hpp"
 
-namespace MyDirektion {
-	enum Direktion : unsigned char {
+namespace MyDirection {
+	enum Direction : unsigned char {
 		Up,
 		Down,
 		Left,
@@ -20,7 +20,7 @@ namespace MyDirektion {
 		Neutral
 	};
 
-	constexpr inline Direktion RotateCW(const Direktion& d) {
+	constexpr inline Direction RotateCW(const Direction& d) {
 		switch (d) {
 		case Up: return Right;
 		case Down: return Left;
@@ -35,7 +35,7 @@ namespace MyDirektion {
 		}
 	}
 
-	constexpr inline Direktion RotateCCW(const Direktion& d) {
+	constexpr inline Direction RotateCCW(const Direction& d) {
 		switch (d) {
 		case Up: return Left;
 		case Down: return Right;
@@ -50,7 +50,7 @@ namespace MyDirektion {
 		}
 	}
 
-	constexpr inline Direktion ToReadable(const Direktion& d) {
+	constexpr inline Direction ToReadable(const Direction& d) {
 		switch (d) {
 		case Up: return Up;
 		case Down: return Up;
@@ -65,7 +65,38 @@ namespace MyDirektion {
 		}
 	}
 
-	constexpr inline Direktion operator!(const Direktion& d) {
+	constexpr inline bool IsAxisAligned(const Direction& d) {
+		switch (d) {
+		case Up:
+		case Down:
+		case Left:
+		case Right:
+			return true;
+		case UpLeft:
+		case UpRight:
+		case DownLeft:
+		case DownRight:
+		default:
+			return false;
+		}
+	}
+
+	constexpr inline bool IsHorizontal(const Direction& d) {
+		if (!IsAxisAligned(d)) return false;
+		switch (d) {
+		case Up:
+		case Down:
+			return false;
+		case Left:
+		case Right:
+			return true;
+		default:
+			assert(false && "Sould be handeled in IsAxisAligned");
+			return false;
+		}
+	}
+
+	constexpr inline Direction operator!(const Direction& d) {
 		switch (d) {
 		case Up: return Down;
 		case Down: return Up;
@@ -81,7 +112,7 @@ namespace MyDirektion {
 		}
 	}
 
-	constexpr inline const std::array<std::string_view, size_t(Neutral) + 1> DirektionToString{
+	constexpr inline const std::array<std::string_view, size_t(Neutral) + 1> DirectionToString{
 		"Up",
 		"Down",
 		"Left",
@@ -93,7 +124,7 @@ namespace MyDirektion {
 		"Neutral"
 	};
 
-	constexpr inline bool contains(const Direktion& d1, const Direktion& d2) {
+	constexpr inline bool contains(const Direction& d1, const Direction& d2) {
 		if (d1 == d2)return true;
 		if (d1 == !d2)return false;
 		if (d2 == Up && (d1 == UpRight || d1 == UpLeft))return true;
@@ -103,7 +134,7 @@ namespace MyDirektion {
 		return false;
 	}
 
-	constexpr inline Direktion operator+(const Direktion& d1, const Direktion& d2) {
+	constexpr inline Direction operator+(const Direction& d1, const Direction& d2) {
 		if (d1 == Neutral) return d2;
 		if (d2 == Neutral) return d1;
 
@@ -219,8 +250,8 @@ public:
 		y += o.y;
 		return *this;
 	}
-	constexpr Point<T>& operator +=(const MyDirektion::Direktion& d) {
-		using namespace MyDirektion;
+	constexpr Point<T>& operator +=(const MyDirection::Direction& d) {
+		using namespace MyDirection;
 		if (d == Up)y -= 1;
 		if (d == Down)y += 1;
 		if (d == Left)x -= 1;
@@ -248,7 +279,7 @@ public:
 		y -= o.y;
 		return *this;
 	}
-	constexpr Point<T>& operator -=(const MyDirektion::Direktion& d) {
+	constexpr Point<T>& operator -=(const MyDirection::Direction& d) {
 		return ((*this) += !d);
 	}
 	constexpr Point<T>& operator *=(const double& d) {
@@ -298,15 +329,15 @@ public:
 		return Point(p1.x + p2.x, p1.y + p2.y);
 	}
 
-	friend constexpr Point<T> operator +(const Point<T>& p, const MyDirektion::Direktion& D) {
+	friend constexpr Point<T> operator +(const Point<T>& p, const MyDirection::Direction& D) {
 		return Point<T>(p) += D;
 	}
 
-	friend constexpr Point<T> operator +(const MyDirektion::Direktion& D, const Point<T>& p) {
+	friend constexpr Point<T> operator +(const MyDirection::Direction& D, const Point<T>& p) {
 		return p + D;
 	}
 
-	friend constexpr Point<T> operator -(const Point<T>& p, const MyDirektion::Direktion& D) {
+	friend constexpr Point<T> operator -(const Point<T>& p, const MyDirection::Direction& D) {
 		return Point<T>(p) -= D;
 	}
 
