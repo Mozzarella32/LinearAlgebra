@@ -50,6 +50,21 @@ namespace MyDirektion {
 		}
 	}
 
+	constexpr inline Direktion ToReadable(const Direktion& d) {
+		switch (d) {
+		case Up: return Up;
+		case Down: return Up;
+		case Left: return Left;
+		case Right: return Left;
+		case UpLeft: return Up;
+		case UpRight: return Left;
+		case DownLeft: return Up;
+		case DownRight: return Left;
+		default:
+			return Up;
+		}
+	}
+
 	constexpr inline Direktion operator!(const Direktion& d) {
 		switch (d) {
 		case Up: return Down;
