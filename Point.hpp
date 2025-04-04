@@ -50,6 +50,36 @@ namespace MyDirection {
 		}
 	}
 
+	constexpr inline Direction FlipV(const Direction& d) {
+		switch (d) {
+		case Up: return Down;
+		case Down: return Up;
+		case Left: return Left;
+		case Right: return Right;
+		case UpLeft: return DownLeft;
+		case UpRight: return DownRight;
+		case DownLeft: return UpLeft;
+		case DownRight: return UpRight;
+		default:
+			return Neutral;
+		}
+	}
+
+	constexpr inline Direction FlipH(const Direction& d) {
+		switch (d) {
+		case Up: return Up;
+		case Down: return Down;
+		case Left: return Right;
+		case Right: return Left;
+		case UpLeft: return UpRight;
+		case UpRight: return UpLeft;
+		case DownLeft: return DownRight;
+		case DownRight: return DownLeft;
+		default:
+			return Neutral;
+		}
+	}
+
 	constexpr inline Direction ToReadable(const Direction& d) {
 		switch (d) {
 		case Up: return Up;
